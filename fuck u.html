@@ -1,0 +1,1032 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#080808" />
+  <title>fuck u</title>
+  <style>
+    :root{
+      --bg:#080808;
+      --panel:#101010;
+      --panel2:#151515;
+      --line:#292929;
+      --line2:#363636;
+      --text:#f5f5f5;
+      --muted:#8c8c8c;
+      --hot:#ff3b30;
+      --hot2:#ff594f;
+      --shadow:0 18px 60px rgba(0,0,0,.45);
+      --radius:14px;
+    }
+
+    *{box-sizing:border-box}
+    html{background:var(--bg);scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100vh;
+      background:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px),
+        var(--bg);
+      background-size:32px 32px;
+      color:var(--text);
+      font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      letter-spacing:-.015em;
+    }
+
+    button,input,select{font:inherit}
+    button{color:inherit}
+    a{color:inherit}
+    ::selection{background:var(--hot);color:#fff}
+
+    .shell{
+      width:min(1540px,100%);
+      margin:0 auto;
+      padding:18px clamp(14px,2.2vw,32px) 80px;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:30;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-height:72px;
+      margin:0 -8px 24px;
+      padding:10px 8px;
+      background:rgba(8,8,8,.86);
+      border-bottom:1px solid rgba(255,255,255,.06);
+      backdrop-filter:blur(20px) saturate(130%);
+      -webkit-backdrop-filter:blur(20px) saturate(130%);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:max-content;
+      user-select:none;
+    }
+
+    .brandmark{
+      width:38px;height:38px;
+      display:grid;place-items:center;
+      border:1px solid var(--line2);
+      background:#121212;
+      font-size:20px;
+      font-weight:900;
+      border-radius:10px;
+      box-shadow:inset 0 1px rgba(255,255,255,.05);
+    }
+
+    .brandcopy{line-height:1}
+    .brandcopy strong{
+      display:block;
+      font-size:20px;
+      font-weight:900;
+      text-transform:lowercase;
+      letter-spacing:-.055em;
+    }
+    .brandcopy span{
+      display:block;
+      margin-top:5px;
+      color:var(--muted);
+      font:600 10px/1.1 ui-monospace,SFMono-Regular,Menlo,monospace;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+
+    .searchwrap{
+      flex:1;
+      position:relative;
+      min-width:150px;
+    }
+    .searchwrap svg{
+      position:absolute;
+      left:14px;top:50%;
+      transform:translateY(-50%);
+      width:17px;height:17px;
+      color:#777;
+      pointer-events:none;
+    }
+    #search{
+      width:100%;
+      height:44px;
+      border:1px solid var(--line);
+      border-radius:11px;
+      outline:none;
+      background:#111;
+      color:#fff;
+      padding:0 42px 0 42px;
+      transition:border-color .16s,background .16s,box-shadow .16s;
+    }
+    #search::placeholder{color:#666}
+    #search:focus{
+      background:#141414;
+      border-color:#4a4a4a;
+      box-shadow:0 0 0 3px rgba(255,255,255,.035);
+    }
+    .shortcut{
+      position:absolute;
+      right:10px;top:50%;
+      transform:translateY(-50%);
+      border:1px solid #303030;
+      background:#191919;
+      color:#777;
+      padding:3px 7px;
+      border-radius:6px;
+      font:600 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+    }
+
+    .topactions{display:flex;gap:8px}
+    .iconbtn,.pillbtn{
+      height:44px;
+      border:1px solid var(--line);
+      background:#111;
+      border-radius:11px;
+      cursor:pointer;
+      transition:.16s ease;
+    }
+    .iconbtn{
+      width:44px;
+      display:grid;
+      place-items:center;
+    }
+    .iconbtn svg{width:18px;height:18px}
+    .pillbtn{
+      padding:0 15px;
+      font-weight:750;
+      font-size:13px;
+    }
+    .iconbtn:hover,.pillbtn:hover{
+      background:#191919;
+      border-color:#3c3c3c;
+      transform:translateY(-1px);
+    }
+    .pillbtn.hot{border-color:#5c201d;background:#24100f;color:#ff8b84}
+
+    .hero{
+      display:grid;
+      grid-template-columns:minmax(0,1.7fr) minmax(260px,.8fr);
+      gap:14px;
+      margin-bottom:20px;
+    }
+
+    .heroMain,.statCard{
+      border:1px solid var(--line);
+      background:#0e0e0e;
+      border-radius:var(--radius);
+      box-shadow:inset 0 1px rgba(255,255,255,.025);
+    }
+    .heroMain{
+      min-height:250px;
+      padding:clamp(24px,4vw,52px);
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      overflow:hidden;
+      position:relative;
+    }
+    .heroMain:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 80% 15%, rgba(255,59,48,.14), transparent 33%),
+        linear-gradient(135deg, transparent 0 55%, rgba(255,255,255,.018) 55% 56%, transparent 56% 100%);
+      pointer-events:none;
+    }
+    .kicker{
+      position:relative;
+      color:#a3a3a3;
+      text-transform:uppercase;
+      font:700 11px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;
+      letter-spacing:.12em;
+      margin-bottom:12px;
+    }
+    h1{
+      position:relative;
+      margin:0;
+      font-size:clamp(48px,8vw,118px);
+      line-height:.78;
+      letter-spacing:-.085em;
+      font-weight:950;
+      text-transform:lowercase;
+    }
+    .heroText{
+      position:relative;
+      max-width:650px;
+      margin:22px 0 0;
+      color:#9a9a9a;
+      font-size:14px;
+      line-height:1.55;
+    }
+    .heroText b{color:#ddd}
+    .heroSlash{
+      color:var(--hot);
+      font-weight:900;
+      margin-right:6px;
+    }
+
+    .stats{
+      display:grid;
+      gap:14px;
+      grid-template-rows:1fr 1fr;
+    }
+    .statCard{
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .statLabel{
+      color:#737373;
+      text-transform:uppercase;
+      font:700 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+      letter-spacing:.1em;
+    }
+    .statValue{
+      font-size:clamp(38px,5vw,68px);
+      font-weight:900;
+      letter-spacing:-.065em;
+      line-height:1;
+      margin-top:18px;
+    }
+    .statFoot{margin-top:9px;color:#707070;font-size:12px}
+
+    .controls{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin:0 0 18px;
+      min-width:0;
+    }
+    .chips{
+      flex:1;
+      display:flex;
+      gap:8px;
+      overflow:auto;
+      scrollbar-width:none;
+      padding:1px 0;
+    }
+    .chips::-webkit-scrollbar{display:none}
+    .chip{
+      border:1px solid var(--line);
+      background:#0f0f0f;
+      color:#aaa;
+      height:36px;
+      padding:0 13px;
+      border-radius:999px;
+      cursor:pointer;
+      white-space:nowrap;
+      font-size:12px;
+      font-weight:700;
+      transition:.15s;
+    }
+    .chip:hover{color:#ddd;border-color:#3b3b3b;background:#151515}
+    .chip.active{background:#f2f2f2;color:#080808;border-color:#f2f2f2}
+    .resultCount{
+      flex:0 0 auto;
+      color:#777;
+      font:600 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+      white-space:nowrap;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+      gap:12px;
+    }
+
+    .game{
+      min-width:0;
+      border:1px solid var(--line);
+      background:#0d0d0d;
+      border-radius:13px;
+      overflow:hidden;
+      cursor:pointer;
+      transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease;
+      position:relative;
+      contain:content;
+    }
+    .game:hover{
+      transform:translateY(-3px);
+      border-color:#414141;
+      background:#111;
+      box-shadow:0 14px 34px rgba(0,0,0,.28);
+    }
+    .cover{
+      position:relative;
+      width:100%;
+      aspect-ratio:16/10;
+      background:#131313;
+      overflow:hidden;
+      border-bottom:1px solid #232323;
+    }
+    .cover img{
+      width:100%;height:100%;
+      object-fit:cover;
+      display:block;
+      transition:transform .24s ease,filter .2s ease;
+      background:#151515;
+    }
+    .game:hover .cover img{transform:scale(1.025)}
+    .cover:after{
+      content:"PLAY";
+      position:absolute;
+      right:9px;bottom:9px;
+      border:1px solid rgba(255,255,255,.15);
+      background:rgba(0,0,0,.72);
+      color:#eee;
+      padding:5px 8px;
+      border-radius:7px;
+      font:800 9px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+      letter-spacing:.09em;
+      opacity:0;
+      transform:translateY(3px);
+      transition:.18s ease;
+      backdrop-filter:blur(10px);
+    }
+    .game:hover .cover:after{opacity:1;transform:none}
+    .fallback{
+      width:100%;height:100%;
+      display:none;
+      place-items:center;
+      background:#111;
+      color:#353535;
+      font-weight:950;
+      font-size:44px;
+      letter-spacing:-.08em;
+    }
+
+    .gameMeta{padding:12px 12px 13px}
+    .gameName{
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      font-size:13px;
+      font-weight:780;
+      letter-spacing:-.025em;
+    }
+    .gameSub{
+      display:flex;
+      gap:7px;
+      align-items:center;
+      margin-top:8px;
+      min-width:0;
+      color:#686868;
+      font:600 9px/1.15 ui-monospace,SFMono-Regular,Menlo,monospace;
+      text-transform:uppercase;
+      letter-spacing:.07em;
+    }
+    .gameSub span{
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .dot{width:3px;height:3px;border-radius:50%;background:#3e3e3e;flex:0 0 auto}
+    .fav{
+      position:absolute;
+      top:8px;left:8px;
+      width:30px;height:30px;
+      border:1px solid rgba(255,255,255,.13);
+      background:rgba(0,0,0,.68);
+      color:#9b9b9b;
+      border-radius:8px;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      opacity:0;
+      transition:.15s;
+      z-index:3;
+      backdrop-filter:blur(10px);
+    }
+    .game:hover .fav,.fav.active{opacity:1}
+    .fav:hover{color:#fff;background:#111}
+    .fav.active{color:#ff6259;border-color:#6b2b27}
+    .fav svg{width:15px;height:15px}
+
+    .empty{
+      display:none;
+      border:1px dashed #333;
+      border-radius:14px;
+      padding:70px 22px;
+      color:#777;
+      text-align:center;
+      font:650 13px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;
+    }
+
+    #sentinel{height:1px}
+
+    .player{
+      position:fixed;
+      inset:0;
+      z-index:100;
+      background:#050505;
+      display:none;
+      flex-direction:column;
+    }
+    .player.open{display:flex}
+    .playerbar{
+      height:58px;
+      flex:0 0 58px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:0 10px 0 16px;
+      background:#0a0a0a;
+      border-bottom:1px solid #252525;
+    }
+    .playerTitle{
+      flex:1;min-width:0;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .playerTitle strong{
+      min-width:0;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      font-size:13px;
+    }
+    .playerTitle span{
+      color:#676767;
+      font:600 9px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      white-space:nowrap;
+    }
+    .playerActions{display:flex;gap:7px}
+    .pbtn{
+      height:36px;
+      border:1px solid #2c2c2c;
+      background:#111;
+      border-radius:9px;
+      padding:0 11px;
+      cursor:pointer;
+      font-size:11px;
+      font-weight:750;
+    }
+    .pbtn:hover{background:#181818;border-color:#404040}
+    .pbtn.danger{color:#ff8a83;border-color:#51211e}
+    #gameFrame{
+      width:100%;
+      flex:1;
+      min-height:0;
+      border:0;
+      background:#000;
+    }
+    .loading{
+      position:absolute;
+      inset:58px 0 0;
+      display:grid;
+      place-items:center;
+      background:#050505;
+      color:#666;
+      font:650 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      pointer-events:none;
+      transition:opacity .2s;
+    }
+    .loading.hidden{opacity:0}
+    .loaderLine{
+      width:min(280px,70vw);
+      height:2px;
+      background:#1c1c1c;
+      overflow:hidden;
+      margin-top:12px;
+    }
+    .loaderLine:after{
+      content:"";
+      display:block;
+      width:38%;
+      height:100%;
+      background:var(--hot);
+      animation:load 1s ease-in-out infinite;
+    }
+    @keyframes load{from{transform:translateX(-120%)}to{transform:translateX(300%)}}
+
+    .toast{
+      position:fixed;
+      z-index:120;
+      left:50%;
+      bottom:22px;
+      transform:translate(-50%,18px);
+      padding:10px 13px;
+      background:#f2f2f2;
+      color:#090909;
+      border-radius:9px;
+      font-size:11px;
+      font-weight:800;
+      opacity:0;
+      pointer-events:none;
+      transition:.2s ease;
+      box-shadow:var(--shadow);
+    }
+    .toast.show{opacity:1;transform:translate(-50%,0)}
+
+    .footer{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      border-top:1px solid #222;
+      margin-top:42px;
+      padding-top:18px;
+      color:#555;
+      font:600 10px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;
+    }
+
+    @media(max-width:820px){
+      .topbar{flex-wrap:wrap}
+      .brand{order:1}
+      .topactions{order:2;margin-left:auto}
+      .searchwrap{order:3;flex-basis:100%}
+      .hero{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr 1fr;grid-template-rows:none}
+      .heroMain{min-height:230px}
+      .grid{grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:10px}
+      .controls{align-items:flex-start;flex-direction:column}
+      .chips{width:100%}
+      .playerTitle span{display:none}
+    }
+
+    @media(max-width:500px){
+      .shell{padding-left:10px;padding-right:10px}
+      .topbar{margin-left:-2px;margin-right:-2px}
+      .brandcopy span{display:none}
+      .pillbtn .desktopLabel{display:none}
+      .heroMain{padding:26px 20px}
+      h1{font-size:68px}
+      .stats{gap:10px}
+      .statCard{padding:16px}
+      .statValue{font-size:36px}
+      .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .gameMeta{padding:10px}
+      .playerbar{padding-left:10px}
+      .pbtn{padding:0 9px}
+      .footer{flex-direction:column}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      *,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brandmark">F</div>
+        <div class="brandcopy">
+          <strong>fuck u</strong>
+          <span>extremely serious gaming corporation</span>
+        </div>
+      </div>
+
+      <div class="searchwrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path>
+        </svg>
+        <input id="search" autocomplete="off" spellcheck="false" placeholder="find a game..." />
+        <span class="shortcut">/</span>
+      </div>
+
+      <div class="topactions">
+        <button class="pillbtn" id="favOnly" title="Show favorites">♡ <span class="desktopLabel">favorites</span></button>
+        <button class="pillbtn hot" id="randomBtn" title="Pick a random game">↯ <span class="desktopLabel">random</span></button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <article class="heroMain">
+        <div class="kicker"><span class="heroSlash">//</span>yes, that is actually the name</div>
+        <h1>fuck u</h1>
+        <p class="heroText">
+          <b>Games. No inspirational paragraph.</b> Search it, click it, play it.
+          The library is pulled from the GGR master scrape list instead of being copied into this page.
+        </p>
+      </article>
+
+      <div class="stats">
+        <article class="statCard">
+          <span class="statLabel">games loaded</span>
+          <strong class="statValue" id="gameCount">—</strong>
+          <span class="statFoot" id="loadState">reading the giant list...</span>
+        </article>
+        <article class="statCard">
+          <span class="statLabel">sources</span>
+          <strong class="statValue" id="sourceCount">—</strong>
+          <span class="statFoot">one unnecessarily large pile</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="controls">
+      <div class="chips" id="chips">
+        <button class="chip active" data-source="all">all</button>
+      </div>
+      <div class="resultCount" id="resultCount">loading...</div>
+    </section>
+
+    <section id="grid" class="grid" aria-live="polite"></section>
+    <div class="empty" id="empty">
+      nothing.<br>impressive. you searched for something that doesn't exist.
+    </div>
+    <div id="sentinel"></div>
+
+    <footer class="footer">
+      <span>fuck u / private build</span>
+      <span>game data: greatestgreatest-revive · master scrape list</span>
+    </footer>
+  </main>
+
+  <section class="player" id="player" aria-hidden="true">
+    <div class="playerbar">
+      <div class="playerTitle">
+        <strong id="playerName">game</strong>
+        <span id="playerSource">source</span>
+      </div>
+      <div class="playerActions">
+        <button class="pbtn" id="reloadBtn" title="Reload game">reload</button>
+        <button class="pbtn" id="directBtn" title="Open game directly">open ↗</button>
+        <button class="pbtn" id="fullBtn" title="Fullscreen">full</button>
+        <button class="pbtn danger" id="closeBtn" title="Close game">close</button>
+      </div>
+    </div>
+    <iframe id="gameFrame"
+      referrerpolicy="no-referrer"
+      allow="autoplay; fullscreen; gamepad; clipboard-read; clipboard-write; pointer-lock"
+      allowfullscreen></iframe>
+    <div class="loading" id="loading">
+      <div>
+        loading game
+        <div class="loaderLine"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="toast" id="toast">saved</div>
+
+  <script>
+    (() => {
+      'use strict';
+
+      const REPO = 'lauraevan/greatestgreatest-revive';
+      const BRANCH = 'main';
+      const GGR_EXEC_BASE = `https://raw.githack.com/${REPO}/${BRANCH}/`;
+      const GGR_ASSET_BASE = `https://cdn.jsdelivr.net/gh/${REPO}@${BRANCH}/`;
+
+      const SCRIPT_CANDIDATES = [
+        `${GGR_ASSET_BASE}scrapegames.js`,
+        `${GGR_EXEC_BASE}scrapegames.js`,
+        `https://raw.githubusercontent.com/${REPO}/${BRANCH}/scrapegames.js`
+      ];
+
+      const $ = (s, root = document) => root.querySelector(s);
+      const $$ = (s, root = document) => [...root.querySelectorAll(s)];
+
+      const grid = $('#grid');
+      const empty = $('#empty');
+      const search = $('#search');
+      const chips = $('#chips');
+      const resultCount = $('#resultCount');
+      const gameCount = $('#gameCount');
+      const sourceCount = $('#sourceCount');
+      const loadState = $('#loadState');
+      const player = $('#player');
+      const frame = $('#gameFrame');
+      const loading = $('#loading');
+      const playerName = $('#playerName');
+      const playerSource = $('#playerSource');
+      const favOnlyBtn = $('#favOnly');
+      const toast = $('#toast');
+
+      let allGames = [];
+      let filtered = [];
+      let sourceFilter = 'all';
+      let favoritesOnly = false;
+      let visibleCount = 72;
+      let currentGame = null;
+      let toastTimer = null;
+
+      const favorites = new Set(JSON.parse(localStorage.getItem('fu:favorites') || '[]'));
+
+      function saveFavorites() {
+        localStorage.setItem('fu:favorites', JSON.stringify([...favorites]));
+      }
+
+      function gameKey(g) {
+        return `${g.source}|${g.name}|${g.play}`;
+      }
+
+      function executableGameURL(url) {
+        if (!url) return '';
+
+        let u = url.startsWith('//') ? `https:${url}` : url;
+
+        // jsDelivr is excellent for JS/CSS/assets, but HTML files from GitHub
+        // can be delivered as source/plain text. Convert GitHub-backed HTML
+        // game URLs to RawGitHack, which serves them as executable text/html.
+        let m = u.match(/^https?:\/\/cdn\.jsdelivr\.net\/gh\/([^/]+)\/([^@/]+)@([^/]+)\/(.+)$/i);
+        if (m) {
+          const [, owner, repo, ref, path] = m;
+          return `https://raw.githack.com/${owner}/${repo}/${ref}/${path}`;
+        }
+
+        // Same problem with raw.githubusercontent.com: browsers normally show
+        // the file as text instead of rendering the page.
+        m = u.match(/^https?:\/\/raw\.githubusercontent\.com\/([^/]+)\/([^/]+)\/([^/]+)\/(.+)$/i);
+        if (m) {
+          const [, owner, repo, ref, path] = m;
+          return `https://raw.githack.com/${owner}/${repo}/${ref}/${path}`;
+        }
+
+        // Convert normal GitHub blob/raw links when they appear in a scrape.
+        m = u.match(/^https?:\/\/github\.com\/([^/]+)\/([^/]+)\/blob\/([^/]+)\/(.+)$/i);
+        if (m) {
+          const [, owner, repo, ref, path] = m;
+          return `https://raw.githack.com/${owner}/${repo}/${ref}/${path}`;
+        }
+
+        m = u.match(/^https?:\/\/github\.com\/([^/]+)\/([^/]+)\/raw\/([^/]+)\/(.+)$/i);
+        if (m) {
+          const [, owner, repo, ref, path] = m;
+          return `https://raw.githack.com/${owner}/${repo}/${ref}/${path}`;
+        }
+
+        return u;
+      }
+
+      function absolutePlay(url) {
+        if (!url) return '';
+        if (/^(https?:)?\/\//i.test(url)) return executableGameURL(url);
+        return executableGameURL(GGR_EXEC_BASE + url.replace(/^\.?\//, ''));
+      }
+
+      function absoluteIcon(url) {
+        if (!url) return '';
+        if (/^(https?:)?\/\//i.test(url)) return url.startsWith('//') ? `https:${url}` : url;
+        return GGR_ASSET_BASE + url.replace(/^\.?\//, '');
+      }
+
+      function normalize(row, index) {
+        if (!Array.isArray(row) || row.length < 4) return null;
+        const [source, play, icon, name] = row;
+        return {
+          id: index,
+          source: String(source || 'unknown').trim(),
+          play: absolutePlay(String(play || '').trim()),
+          icon: absoluteIcon(String(icon || '').trim()),
+          name: String(name || `game ${index + 1}`).trim()
+        };
+      }
+
+      function esc(value) {
+        return String(value).replace(/[&<>"']/g, ch => ({
+          '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+        })[ch]);
+      }
+
+      function showToast(text) {
+        toast.textContent = text;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 1200);
+      }
+
+      function loadScriptAt(index = 0) {
+        if (index >= SCRIPT_CANDIDATES.length) {
+          loadState.textContent = 'could not load scrape list';
+          resultCount.textContent = 'source unavailable';
+          empty.style.display = 'block';
+          empty.innerHTML = 'could not load <b>scrapegames.js</b>.<br>check your connection or the repo path.';
+          return;
+        }
+
+        const tag = document.createElement('script');
+        tag.src = SCRIPT_CANDIDATES[index];
+        tag.async = true;
+        tag.onload = () => {
+          if (Array.isArray(window.SCRAPE_GAMES) && window.SCRAPE_GAMES.length) init();
+          else loadScriptAt(index + 1);
+        };
+        tag.onerror = () => loadScriptAt(index + 1);
+        document.head.appendChild(tag);
+      }
+
+      function init() {
+        allGames = window.SCRAPE_GAMES.map(normalize).filter(Boolean);
+        allGames.sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true,sensitivity:'base'}));
+
+        const sourceTotals = new Map();
+        for (const g of allGames) sourceTotals.set(g.source, (sourceTotals.get(g.source) || 0) + 1);
+        const sources = [...sourceTotals.keys()].sort((a,b) => sourceTotals.get(b) - sourceTotals.get(a));
+
+        gameCount.textContent = allGames.length.toLocaleString();
+        sourceCount.textContent = sources.length.toLocaleString();
+        loadState.textContent = 'master list online';
+
+        for (const source of sources) {
+          const btn = document.createElement('button');
+          btn.className = 'chip';
+          btn.dataset.source = source;
+          btn.textContent = `${source} · ${sourceTotals.get(source)}`;
+          chips.appendChild(btn);
+        }
+
+        applyFilters();
+      }
+
+      function applyFilters(resetVisible = true) {
+        if (resetVisible) visibleCount = 72;
+
+        const q = search.value.trim().toLowerCase();
+        filtered = allGames.filter(g => {
+          if (favoritesOnly && !favorites.has(gameKey(g))) return false;
+          if (sourceFilter !== 'all' && g.source !== sourceFilter) return false;
+          if (!q) return true;
+          return g.name.toLowerCase().includes(q) || g.source.toLowerCase().includes(q);
+        });
+
+        resultCount.textContent = `${filtered.length.toLocaleString()} result${filtered.length === 1 ? '' : 's'}`;
+        render();
+      }
+
+      function makeCard(g) {
+        const key = gameKey(g);
+        const isFav = favorites.has(key);
+        const initials = g.name.replace(/[^a-z0-9 ]/gi,'').trim().split(/\s+/).slice(0,2).map(x => x[0] || '').join('').toUpperCase() || '?';
+
+        const card = document.createElement('article');
+        card.className = 'game';
+        card.tabIndex = 0;
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', `Play ${g.name}`);
+        card.innerHTML = `
+          <button class="fav ${isFav ? 'active' : ''}" title="${isFav ? 'Remove favorite' : 'Add favorite'}" aria-label="${isFav ? 'Remove favorite' : 'Add favorite'}">
+            <svg viewBox="0 0 24 24" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.8">
+              <path d="m12 20.7-1.2-1.1C5.1 14.5 2 11.7 2 8.2 2 5.4 4.2 3.2 7 3.2c1.6 0 3.1.7 4 1.9 1-1.2 2.5-1.9 4-1.9 2.8 0 5 2.2 5 5 0 3.5-3.1 6.3-8.8 11.4L12 20.7Z"></path>
+            </svg>
+          </button>
+          <div class="cover">
+            <img loading="lazy" decoding="async" src="${esc(g.icon)}" alt="">
+            <div class="fallback">${esc(initials)}</div>
+          </div>
+          <div class="gameMeta">
+            <div class="gameName" title="${esc(g.name)}">${esc(g.name)}</div>
+            <div class="gameSub"><span>${esc(g.source)}</span><i class="dot"></i><span>${g.play.includes('raw.githack.com/' + REPO) ? 'local' : 'external'}</span></div>
+          </div>
+        `;
+
+        const img = $('img', card);
+        const fallback = $('.fallback', card);
+        img.addEventListener('error', () => {
+          img.style.display = 'none';
+          fallback.style.display = 'grid';
+        });
+
+        const fav = $('.fav', card);
+        fav.addEventListener('click', e => {
+          e.stopPropagation();
+          if (favorites.has(key)) {
+            favorites.delete(key);
+            fav.classList.remove('active');
+            fav.title = 'Add favorite';
+            fav.setAttribute('aria-label','Add favorite');
+            $('svg',fav).setAttribute('fill','none');
+            showToast('removed');
+          } else {
+            favorites.add(key);
+            fav.classList.add('active');
+            fav.title = 'Remove favorite';
+            fav.setAttribute('aria-label','Remove favorite');
+            $('svg',fav).setAttribute('fill','currentColor');
+            showToast('saved');
+          }
+          saveFavorites();
+          if (favoritesOnly) applyFilters(false);
+        });
+
+        card.addEventListener('click', () => openGame(g));
+        card.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openGame(g);
+          }
+        });
+
+        return card;
+      }
+
+      function render() {
+        grid.textContent = '';
+        const list = filtered.slice(0, visibleCount);
+        const frag = document.createDocumentFragment();
+        for (const g of list) frag.appendChild(makeCard(g));
+        grid.appendChild(frag);
+
+        const none = filtered.length === 0;
+        grid.style.display = none ? 'none' : 'grid';
+        empty.style.display = none ? 'block' : 'none';
+      }
+
+      function openGame(g) {
+        currentGame = g;
+        playerName.textContent = g.name;
+        playerSource.textContent = g.source;
+        frame.src = 'about:blank';
+        loading.classList.remove('hidden');
+        player.classList.add('open');
+        player.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+
+        requestAnimationFrame(() => {
+          frame.src = g.play;
+        });
+
+        const recent = JSON.parse(localStorage.getItem('fu:recent') || '[]')
+          .filter(x => x !== gameKey(g));
+        recent.unshift(gameKey(g));
+        localStorage.setItem('fu:recent', JSON.stringify(recent.slice(0,30)));
+      }
+
+      function closeGame() {
+        player.classList.remove('open');
+        player.setAttribute('aria-hidden','true');
+        document.body.style.overflow = '';
+        frame.src = 'about:blank';
+        currentGame = null;
+      }
+
+      frame.addEventListener('load', () => {
+        if (frame.src !== 'about:blank') loading.classList.add('hidden');
+      });
+
+      $('#closeBtn').addEventListener('click', closeGame);
+      $('#reloadBtn').addEventListener('click', () => {
+        if (!currentGame) return;
+        loading.classList.remove('hidden');
+        frame.src = 'about:blank';
+        requestAnimationFrame(() => frame.src = currentGame.play);
+      });
+      $('#directBtn').addEventListener('click', () => {
+        if (currentGame) window.open(currentGame.play, '_blank', 'noopener,noreferrer');
+      });
+      $('#fullBtn').addEventListener('click', async () => {
+        try {
+          if (!document.fullscreenElement) await player.requestFullscreen();
+          else await document.exitFullscreen();
+        } catch (_) {}
+      });
+
+      search.addEventListener('input', () => applyFilters());
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && player.classList.contains('open')) closeGame();
+        if (e.key === '/' && !player.classList.contains('open') && document.activeElement !== search) {
+          e.preventDefault();
+          search.focus();
+        }
+      });
+
+      chips.addEventListener('click', e => {
+        const btn = e.target.closest('.chip');
+        if (!btn) return;
+        $$('.chip', chips).forEach(x => x.classList.remove('active'));
+        btn.classList.add('active');
+        sourceFilter = btn.dataset.source;
+        applyFilters();
+      });
+
+      favOnlyBtn.addEventListener('click', () => {
+        favoritesOnly = !favoritesOnly;
+        favOnlyBtn.classList.toggle('hot', favoritesOnly);
+        favOnlyBtn.innerHTML = favoritesOnly
+          ? '♥ <span class="desktopLabel">favorites</span>'
+          : '♡ <span class="desktopLabel">favorites</span>';
+        applyFilters();
+      });
+
+      $('#randomBtn').addEventListener('click', () => {
+        const pool = filtered.length ? filtered : allGames;
+        if (!pool.length) return;
+        openGame(pool[Math.floor(Math.random() * pool.length)]);
+      });
+
+      const observer = new IntersectionObserver(entries => {
+        if (!entries[0].isIntersecting) return;
+        if (visibleCount >= filtered.length) return;
+        visibleCount += 72;
+        render();
+      }, {rootMargin:'800px 0px'});
+      observer.observe($('#sentinel'));
+
+      loadScriptAt();
+    })();
+  </script>
+</body>
+</html>
